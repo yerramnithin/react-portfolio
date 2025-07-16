@@ -25,11 +25,21 @@ function Header() {
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
                 <Link
-                  className="nav-link disabled"
+                  className="nav-link active"
                   aria-current="page"
-                  to="/home"
+                  to="/button"
                 >
-                  Home
+                  Button
+                </Link>
+              </li>
+
+              <li className="nav-item">
+                <Link
+                  className="nav-link active"
+                  aria-current="page"
+                  to="/counter"
+                >
+                  Counter
                 </Link>
               </li>
             </ul>
