@@ -8,50 +8,59 @@ function AgeVerification() {
   const handleVerification = () => {
     const ageNum = Number(age.trim());
 
+    // Basic validation
     if (!name.trim() || !age.trim()) {
       setResultMessage(null);
       return;
     }
 
-    const isEligible = ageNum >= 18;
-    const message = isEligible
-      ? `${name}, you are eligible to vote.`
-      : `${name}, you are not eligible to vote.`;
+    // Invalid or negative input handling
+    if (isNaN(ageNum) || ageNum < 0) {
+      setResultMessage(
+        <div className="alert alert-danger">
+          Please enter a valid non-negative age.
+        </div>
+      );
+      return;
+    }
 
+    const isEligible = ageNum >= 18;
     const alertClass = isEligible ? "alert-success" : "alert-danger";
+    const message = `${name}, you ${
+      isEligible ? "are" : "are not"
+    } eligible to vote.`;
+
     setResultMessage(<div className={`alert ${alertClass}`}>{message}</div>);
   };
 
   return (
-    <div className="p-3 border rounded shadow-sm bg-light w-90 mx-auto mt-3">
-      <h4 className="text-center mb-3">Age Verification</h4>
+    <div className="container mt-3">
+      <p className="display-6 text-center">Age Verification</p>
 
       <input
         type="text"
         placeholder="Enter your name"
         value={name}
         onChange={(e) => setName(e.target.value)}
-        className="form-control mb-2"
+        className="form-control my-2"
       />
 
       <input
         type="number"
+        min="0"
         placeholder="Enter your age"
         value={age}
         onChange={(e) => setAge(e.target.value)}
-        className="form-control mb-2"
+        className="form-control my-2"
       />
 
-      <div className="d-grid gap-2">
-        <button
-          className="btn btn-warning btn-sm w-50 mx-auto"
-          onClick={handleVerification}
-        >
-          Verify Age
+      <div className="d-flex justify-content-center">
+        <button className="btn btn-warning btn-sm" onClick={handleVerification}>
+          Check
         </button>
       </div>
 
-      {resultMessage && <div className="mt-3">{resultMessage}</div>}
+      <div className="mt-3">{resultMessage}</div>
     </div>
   );
 }
