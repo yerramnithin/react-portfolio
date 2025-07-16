@@ -1,9 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const Button = () => {
   const [name, setName] = useState("");
   const [clickCount, setClickCount] = useState(0);
   const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    setMessage("");
+    setClickCount(0);
+  }, [name]);
 
   const handleBlueClick = () => {
     if (clickCount === 4) {
@@ -51,32 +56,44 @@ const Button = () => {
 
   return (
     <>
-      <input
-        type="text"
-        placeholder="Enter your name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        className="form-control my-2 w-75 mx-auto text-center"
-      />
+      <div className="container my-3">
+        <input
+          id="nameInput"
+          type="text"
+          placeholder="Enter your name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          className="form-control mx-auto w-75 text-center"
+        />
+      </div>
+
       <p className="display-6 text-center">
         Click the blue button 5 times to unlock a secret message.
       </p>
+
       <div className="lead d-flex justify-content-center gap-2">
         <button
           className={`btn btn-sm ${primaryBtnClass}`}
           onClick={handlePrimaryClick}
+          disabled={!name.trim()}
         >
           {primaryBtnLabel}
         </button>
         <button
           className={`btn btn-sm ${secondaryBtnClass}`}
           onClick={handleSecondaryClick}
+          disabled={!name.trim()}
         >
           {secondaryBtnLabel}
         </button>
       </div>
+
       <p className="fw-bold text-center mt-3">
-        {clickCount < 0 ? message : `Clicks: ${clickCount}`}
+        {!name.trim()
+          ? "Enter your name to start clicking"
+          : clickCount < 0
+          ? message
+          : `Clicks: ${clickCount}`}
       </p>
     </>
   );
