@@ -4,6 +4,7 @@ import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Button from "./components/Button";
 import Counter from "./components/Counter";
+import AgeVerification from "./components/AgeVerification";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="/home" element={<Home />}></Route>
           <Route path="/button" element={<Button />}></Route>
           <Route path="/counter" element={<Counter />}></Route>
+          <Route path="/age-verification" element={<AgeVerification />}></Route>
         </Routes>
       </main>
       <Footer />

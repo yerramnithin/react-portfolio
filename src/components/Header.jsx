@@ -42,6 +42,16 @@ function Header() {
                   Counter
                 </Link>
               </li>
+
+              <li className="nav-item">
+                <Link
+                  className="nav-link active"
+                  aria-current="page"
+                  to="/age-verification"
+                >
+                  Age Verification
+                </Link>
+              </li>
             </ul>
           </div>
         </div>
